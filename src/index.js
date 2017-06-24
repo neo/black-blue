@@ -4,7 +4,7 @@ import debounce from 'lodash.debounce';
 import init from './init';
 import renderCanvas from './render';
 
-const maxWait = 1000 / 60 * 3;
+const maxWait = 1000 / 60 * 5;
 
 const config = {
   maxWait,
@@ -41,22 +41,22 @@ function mousemove(event) {
 }
 
 function touchstart(event) {
-  startX = event.touches[0].pageX;
-  startY = event.touches[0].pageY;
+  pageX = startX = event.touches[0].pageX;
+  pageY = startY = event.touches[0].pageY;
 }
 
 function touchmove(event) {
-  distX = event.pageX - startX;
-  distY = event.pageY - startY;
-  pageX = event.pageX;
-  pageY = event.pageY;
+  distX = event.touches[0].pageX - startX;
+  distY = event.touches[0].pageY - startY;
+  pageX = event.touches[0].pageX;
+  pageY = event.touches[0].pageY;
 }
 
 function touchend() {
   distX = 0;
   distY = 0;
-  pageX = innerWidth / 2;
-  pageY = innerHeight / 2;
+  pageX = startX = innerWidth / 2;
+  pageY = startY = innerHeight / 2;
 }
 
 window.addEventListener('resize', resize, false);

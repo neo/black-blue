@@ -1,6 +1,8 @@
-import { TweenLite, Back } from 'gsap';
+import { TweenLite, Elastic } from 'gsap';
 
 const damp = 3;
+
+let tween1, tween2;
 
 function render(context, config, point, position, screen) {
   context.fillStyle = config.colors[0];
@@ -11,11 +13,14 @@ function render(context, config, point, position, screen) {
 
   if (screen.isLandscape) {
     const center = screen.innerWidth / 2;
+    const dist = position.pageX - center;
 
-    if (Math.abs(position.distX) > Math.abs(position.pageX - center)) {
-      const duration = config.maxWait / 1000 * 5;
-      TweenLite.to(point, duration, {x: position.pageX, y: position.pageY});
-      TweenLite.to(point, duration * damp, {x: center, delay: duration, ease: Back.easeOut});
+    if (position.distX > dist && dist > 0 || position.distX < dist && dist < 0) {
+      const duration = config.maxWait / 1000 * 3;
+      tween1 && tween1.kill();
+      tween2 && tween2.kill();
+      tween1 = TweenLite.to(point, duration, {x: position.pageX, y: position.pageY});
+      tween2 = TweenLite.to(point, duration * damp, {x: center, delay: duration, ease: Elastic.easeOut});
     }
 
     const x = point.x + 0.1;
@@ -27,15 +32,19 @@ function render(context, config, point, position, screen) {
     context.lineTo(screen.innerWidth, 0);
   } else {
     const center = screen.innerHeight / 2;
+    const dist = position.pageY - center;
 
-    if (Math.abs(position.distY) > Math.abs(position.pageY - center)) {
-      const duration = config.maxWait / 1000 * 5;
-      TweenLite.to(point, duration, {x: position.pageX, y: position.pageY});
-      TweenLite.to(point, duration * damp, {y: center, delay: duration, ease: Back.easeOut});
+    if (position.distY > dist && dist > 0 || position.distY < dist && dist < 0) {
+      const duration = config.maxWait / 1000 * 3;
+      const y = (position.pageY - center) * 2 + center;
+      tween1 && tween1.kill();
+      tween2 && tween2.kill();
+      tween1 = TweenLite.to(point, duration, {x: position.pageX, y});
+      tween2 = TweenLite.to(point, duration * damp, {y: center, delay: duration, ease: Elastic.easeOut});
     }
 
     const x = point.x;
-    const y = (point.y - center) * 2 + center;
+    const y = point.y;
 
     context.moveTo(0, center);
     context.bezierCurveTo(x, y, x, y, screen.innerWidth, center);
