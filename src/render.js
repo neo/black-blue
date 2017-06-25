@@ -1,4 +1,5 @@
-import { TweenLite, Elastic } from 'gsap';
+import TweenLite from 'gsap/TweenLite';
+import { Elastic } from 'gsap/EasePack';
 
 const damp = 3;
 
