@@ -1,9 +1,6 @@
-import TweenLite from 'gsap/TweenLite';
-import { Elastic } from 'gsap/EasePack';
+import { stop, animate, spring } from '@neoli/dynamics.js';
 
 const damp = 3;
-
-let tween1, tween2;
 
 function render(context, config, point, position, screen) {
   context.fillStyle = config.colors[0];
@@ -17,11 +14,10 @@ function render(context, config, point, position, screen) {
     const dist = position.pageX - center;
 
     if (position.distX > dist && dist > 0 || position.distX < dist && dist < 0) {
-      const duration = config.maxWait / 1000 * 3;
-      tween1 && tween1.kill();
-      tween2 && tween2.kill();
-      tween1 = TweenLite.to(point, duration, {x: position.pageX, y: position.pageY});
-      tween2 = TweenLite.to(point, duration * damp, {x: center, delay: duration, ease: Elastic.easeOut});
+      const duration = config.maxWait * 3;
+      stop(point);
+      animate(point, {x: position.pageX, y: position.pageY}, {duration});
+      animate(point, {x: center}, {type: spring, delay: duration, duration: duration * damp});
     }
 
     const x = point.x + 0.1;
@@ -36,12 +32,11 @@ function render(context, config, point, position, screen) {
     const dist = position.pageY - center;
 
     if (position.distY > dist && dist > 0 || position.distY < dist && dist < 0) {
-      const duration = config.maxWait / 1000 * 3;
+      const duration = config.maxWait * 3;
       const y = (position.pageY - center) * 2 + center;
-      tween1 && tween1.kill();
-      tween2 && tween2.kill();
-      tween1 = TweenLite.to(point, duration, {x: position.pageX, y});
-      tween2 = TweenLite.to(point, duration * damp, {y: center, delay: duration, ease: Elastic.easeOut});
+      stop(point);
+      animate(point, {x: position.pageX, y}, {duration});
+      animate(point, {y: center}, {type: spring, delay: duration, duration: duration * damp});
     }
 
     const x = point.x;
