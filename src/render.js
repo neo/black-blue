@@ -1,6 +1,22 @@
 import { stop, animate, spring } from '@neoli/dynamics.js';
 
-const damp = 3;
+const damp = 2;
+
+let isAnimating = false;
+const complete = () => isAnimating = false;
+
+function elastic(duration) {
+  const frequency = 200;
+  const friction = 100;
+  return {
+    type: spring,
+    delay: duration,
+    duration: duration * damp,
+    frequency,
+    friction,
+    complete
+  };
+}
 
 function render(context, config, point, position, screen) {
   context.fillStyle = config.colors[0];
@@ -13,11 +29,12 @@ function render(context, config, point, position, screen) {
     const center = screen.innerWidth / 2;
     const dist = position.pageX - center;
 
-    if (position.distX > dist && dist > 0 || position.distX < dist && dist < 0) {
+    if (Math.abs(position.distX) - Math.abs(dist) > 0 && position.distX * dist > 0 && !isAnimating) {
+      isAnimating = true;
       const duration = config.maxWait * 3;
       stop(point);
       animate(point, {x: position.pageX, y: position.pageY}, {duration});
-      animate(point, {x: center}, {type: spring, delay: duration, duration: duration * damp});
+      animate(point, {x: center}, elastic(duration));
     }
 
     const x = point.x + 0.1;
@@ -31,12 +48,13 @@ function render(context, config, point, position, screen) {
     const center = screen.innerHeight / 2;
     const dist = position.pageY - center;
 
-    if (position.distY > dist && dist > 0 || position.distY < dist && dist < 0) {
+    if (Math.abs(position.distY) - Math.abs(dist) > 0 && position.distY * dist > 0 && !isAnimating) {
+      isAnimating = true;
       const duration = config.maxWait * 3;
       const y = (position.pageY - center) * 2 + center;
       stop(point);
       animate(point, {x: position.pageX, y}, {duration});
-      animate(point, {y: center}, {type: spring, delay: duration, duration: duration * damp});
+      animate(point, {y: center}, elastic(duration));
     }
 
     const x = point.x;
