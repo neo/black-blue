@@ -4,7 +4,7 @@ function init(canvas, rafID) {
   raf.cancel(rafID);
 
   const { innerWidth, innerHeight }  = window;
-  const isLandscape = innerWidth >= innerHeight;
+  const isLandscape = innerWidth > innerHeight;
 
   canvas.width = innerWidth;
   canvas.height = innerHeight;
