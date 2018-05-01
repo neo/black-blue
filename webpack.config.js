@@ -1,18 +1,19 @@
 module.exports = {
-  entry: './src/index.js',
+  mode: "development",
+  entry: "./src/index.js",
   output: {
     path: __dirname,
-    filename: 'bundle.js'
+    filename: "bundle.js"
   },
   module: {
     rules: [
       {
         test: /\.js$/,
-        loader: 'babel-loader'
+        loader: "babel-loader"
       }
     ]
   },
   devServer: {
-    allowedHosts: ['.ngrok.io']
+    allowedHosts: [".ngrok.io"]
   }
 };

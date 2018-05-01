@@ -1,20 +1,21 @@
 {
+  "private": true,
   "scripts": {
-    "build": "webpack -p --color --progress",
-    "test": "webpack-dev-server --open",
+    "build": "webpack --color --progress --mode production",
+    "test": "webpack-serve",
     "posttest": "npm run build"
   },
   "devDependencies": {
-    "babel-core": "^6.26.0",
-    "babel-loader": "^7.1.2",
-    "babel-preset-env": "^1.6.0",
-    "webpack": "^3.5.5",
-    "webpack-dev-server": "^2.7.1"
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.4",
+    "babel-preset-env": "^1.6.1",
+    "webpack": "^4.6.0",
+    "webpack-cli": "^2.1.2",
+    "webpack-serve": "^0.3.2"
   },
   "dependencies": {
     "@neoli/dynamics.js": "^1.0.1",
-    "gsap": "^1.20.2",
     "lodash.debounce": "^4.0.8",
-    "raf": "^3.3.2"
+    "raf": "^3.4.0"
   }
 }
