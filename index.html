@@ -4,11 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Black &amp; Blue</title>
+  <title>Wenchen (Neo) Li</title>
   <style>
-    #canvas, #background { position: absolute; width: 100%; height: 100%; }
-    #half { position: absolute; width: 50%; height: 100%; }
-    @media (orientation: portrait) { #half { width: 100%; height: 50%; } }
+    #canvas, #background, #content { position: absolute; width: 100%; height: 100%; }
+    #content { display: flex; align-items: center; justify-content: space-around; }
+    #half { position: absolute; width: 50%; height: 100%; bottom: 0; right: 0; }
+    svg { width: 6rem; fill: white; }
+    @media (orientation: portrait) { #content { flex-direction: column; } #half { width: 100%; height: 50%; } }
   </style>
 </head>
 <body style="margin: 0; overflow: hidden; position: fixed; width: 100%; height: 100%;">
@@ -18,6 +20,17 @@
       <div id="half" style="background-color: #0077b5;"></div>
     </div>
   </noscript>
+  <main id="content">
+    <a href="https://github.com/neo" title="GitHub" target="_blank">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32.58 31.77">
+        <path d="M16.29,0a16.29,16.29,0,0,0-5.15,31.75c.82.15,1.11-.36,1.11-.79s0-1.41,0-2.77C7.7,29.18,6.74,26,6.74,26a4.36,4.36,0,0,0-1.81-2.39c-1.47-1,.12-1,.12-1a3.43,3.43,0,0,1,2.49,1.68,3.48,3.48,0,0,0,4.74,1.36,3.46,3.46,0,0,1,1-2.18c-3.62-.41-7.42-1.81-7.42-8a6.3,6.3,0,0,1,1.67-4.37,5.94,5.94,0,0,1,.16-4.31s1.37-.44,4.48,1.67a15.41,15.41,0,0,1,8.16,0c3.11-2.11,4.47-1.67,4.47-1.67A5.91,5.91,0,0,1,25,11.07a6.3,6.3,0,0,1,1.67,4.37c0,6.26-3.81,7.63-7.44,8a3.85,3.85,0,0,1,1.11,3c0,2.18,0,3.94,0,4.47s.29.94,1.12.78A16.29,16.29,0,0,0,16.29,0Z" fill-rule="evenodd"/>
+      </svg>
+    </a><a href="https://www.linkedin.com/in/wenchen-li/" title="LinkedIn" target="_blank">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 144 144">
+        <path d="M133.34,0H10.63A10.51,10.51,0,0,0,0,10.38V133.61A10.52,10.52,0,0,0,10.63,144H133.34A10.54,10.54,0,0,0,144,133.61V10.38A10.53,10.53,0,0,0,133.34,0ZM42.71,122.71H21.35V54H42.71ZM32,44.59A12.38,12.38,0,1,1,44.41,32.2,12.39,12.39,0,0,1,32,44.59Zm90.68,78.12H101.36V89.29c0-8-.14-18.23-11.1-18.23-11.11,0-12.81,8.69-12.81,17.65v34H56.1V54H76.59v9.39h.29c2.85-5.41,9.81-11.1,20.2-11.1,21.63,0,25.63,14.23,25.63,32.73Z"/>
+      </svg>
+    </a>
+  </main>
   <script src="./bundle.js"></script>
 </body>
 </html>

@@ -2,8 +2,7 @@
   "private": true,
   "scripts": {
     "build": "webpack --color --progress --mode production",
-    "test": "webpack-serve",
-    "posttest": "npm run build"
+    "test": "webpack-serve"
   },
   "devDependencies": {
     "babel-core": "^6.26.3",
